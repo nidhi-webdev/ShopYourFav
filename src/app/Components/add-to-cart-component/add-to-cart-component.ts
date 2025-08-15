@@ -1,4 +1,4 @@
-import { Component, Signal } from '@angular/core';
+import { Component, computed, signal, Signal } from '@angular/core';
 import { CartService } from '../../Services/cart-service';
 import { PRODUCTS } from '../../Models/products.model';
 
@@ -10,11 +10,26 @@ import { PRODUCTS } from '../../Models/products.model';
 })
 export class AddToCartComponent {
   cartItem!: Signal<PRODUCTS[]>;
+  countSignal = signal<number>(0); // Count Functionality
 
- constructor(private cartservice: CartService) {
-  this.cartItem = this.cartservice.cartItem;
- }
- 
+  constructor(private cartservice: CartService) {
+    this.cartItem = this.cartservice.cartItem;
+  }
+
+  // Count Functionality 
+
+  computeSignal = computed(() => this.countSignal());
+
+  plus() {
+    this.countSignal.set(this.countSignal() + 1);
+  }
+
+  minus() {
+    if (this.countSignal() > 0) {
+      this.countSignal.set(this.countSignal() - 1);
+    }
+  }
+
 
 
 }

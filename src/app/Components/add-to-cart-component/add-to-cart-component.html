@@ -1,8 +1,17 @@
-<p>add-to-cart-component works!</p>
-
-@for (item of cartItem(); track item) {
-<div>
-    {{item.category}}
-    {{item.price}}
+<div class="cart-container">
+  <h1 class="cart-title">Your Cart</h1>
+  @if (cartItem().length === 0) {
+    <div class="empty-cart">Your cart is empty.</div>
+  } @else {
+    @for (item of cartItem(); track item) {
+      <div class="cart-item">
+        <span class="cart-item-title">{{item.title}}</span>
+        <button (click)="minus()"> - </button>
+        {{countSignal()}}
+        <button (click)="plus()"> + </button>
+        <span class="cart-item-price">€{{item.price}}</span>
+      </div>
+    }
+    <button class="checkout-btn">Checkout</button>
+  }
 </div>
-}
