@@ -1,0 +1,32 @@
+.main-layout {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.product-section {
+  flex: 0 0 70%;
+  max-width: 70%;
+  padding: 24px 16px 24px 24px;
+  box-sizing: border-box;
+}
+
+.cart-section {
+  flex: 0 0 30%;
+  max-width: 30%;
+  padding: 24px 24px 24px 16px;
+  box-sizing: border-box;
+  background: #f8f9fa;
+}
+
+@media (max-width: 900px) {
+  .main-layout {
+    flex-direction: column;
+  }
+  .product-section, .cart-section {
+    max-width: 100%;
+    flex: 0 0 100%;
+    padding: 16px;
+  }
+}
