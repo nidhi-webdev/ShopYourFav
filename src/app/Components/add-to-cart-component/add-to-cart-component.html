@@ -2,24 +2,22 @@
     <h1 class="cart-title">Your Cart</h1>
     <!-- cart item {{cartItem() | json}} -->
     @if (cartItem().length === 0) {
-    <div class="empty-cart">Your cart is empty.</div>
+        <div class="empty-cart">Your cart is empty.</div>
     } @else {
-    @for (item of cartItem(); track item.product.id) {
-    <div class="cart-item">
-        <span class="cart-item-title">{{item.product.title}}</span>
+        @for (item of cartItem(); track item.product.id) {
+            <div class="cart-item-row">
+                <span class="cart-item-title">{{item.product.title}}</span>
 
-        <button (click)="removeFromCart(item.product)"> - </button>
-        {{item.quantity}}
-        <button (click)="addToCart(item.product)"> + </button>
+                <button (click)="removeFromCart(item.product)"> - </button>
+                <span class="cart-item-qty">{{item.quantity}}</span>
+                <button (click)="addToCart(item.product)"> + </button>
 
-        <span class="cart-item-price">€{{item.product.price * item.quantity}}</span>
-    </div>
-    
-
-    }
-    <div class="cart-item-total">
-        Grand Total:€{{ grandTotal() }}
-    </div>
-    <button class="checkout-btn">Checkout</button>
+                <span class="cart-item-price">€{{(item.product.price * item.quantity).toFixed(2)}}</span>
+            </div>
+        }
+        <div class="cart-item-total">
+            Grand Total: €{{ grandTotal().toFixed(2) }}
+        </div>
+        <button class="checkout-btn">Checkout</button>
     }
 </div>
