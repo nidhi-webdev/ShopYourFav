@@ -22,6 +22,7 @@ export class CartService {
     });
   }
 
+
   removeFromCartService(product: PRODUCTS) {
     this.cartItem.update(items => {
       return items.map(item => item.product.id === product.id ? 
@@ -30,11 +31,6 @@ export class CartService {
 
     });
   }
-
-  // clearCart() {
-  //   this.cartItem.set([]);
-  // }
-
 
 
 }
