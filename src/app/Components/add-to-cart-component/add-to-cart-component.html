@@ -3,13 +3,15 @@
   @if (cartItem().length === 0) {
     <div class="empty-cart">Your cart is empty.</div>
   } @else {
-    @for (item of cartItem(); track item) {
+    @for (item of cartItem(); track item.product.id) {
       <div class="cart-item">
-        <span class="cart-item-title">{{item.title}}</span>
-        <button (click)="minus()"> - </button>
-        {{countSignal()}}
-        <button (click)="plus()"> + </button>
-        <span class="cart-item-price">€{{item.price}}</span>
+        <span class="cart-item-title">{{item.product.title}}</span>
+
+        <button (click)="removeFromCart(item.product)"> - </button>
+        {{item.quantity}}
+        <button (click)="addToCart(item.product)"> + </button>
+
+        <span class="cart-item-price">€{{item.product.price}}</span>
       </div>
     }
     <button class="checkout-btn">Checkout</button>
