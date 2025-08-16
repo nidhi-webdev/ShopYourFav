@@ -11,7 +11,9 @@
         {{item.quantity}}
         <button (click)="addToCart(item.product)"> + </button>
 
-        <span class="cart-item-price">€{{item.product.price}}</span>
+        <span class="cart-item-price">€{{item.product.price * item.quantity}}</span>
+
+        <!-- <span class="cart-item-price">Total: €{{item.product.price * item.quantity + }}</span> -->
       </div>
     }
     <button class="checkout-btn">Checkout</button>
