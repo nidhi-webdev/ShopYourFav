@@ -1,6 +1,7 @@
 import { Component, computed, signal, Signal } from '@angular/core';
 import { CartService } from '../../Services/cart-service';
 import { CARTPRODUCT, PRODUCTS } from '../../Models/products.model';
+// import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-to-cart-component',
@@ -10,6 +11,7 @@ import { CARTPRODUCT, PRODUCTS } from '../../Models/products.model';
 })
 export class AddToCartComponent {
   cartItem!: Signal<CARTPRODUCT[]>;
+  // grandTotal!: number;
   // countSignal = signal<number>(1); // Count Functionality
 
   constructor(private cartservice: CartService) {
@@ -22,22 +24,15 @@ export class AddToCartComponent {
     this.cartservice.addToCartService(product);
   }
 
-  // Count Functionality 
 
-  // computeSignal = computed(() => this.countSignal());
+  removeFromCart(product: PRODUCTS) {
+    this.cartservice.removeFromCartService(product)
+  }
 
-  // plus() {
-  //   this.countSignal.set(this.countSignal() + 1);
-  // }
-
-  // minus() {
-  //   if (this.countSignal() > 0) {
-  //     this.countSignal.set(this.countSignal() - 1);
-  //   }
-  // }
-
-removeFromCart(product: PRODUCTS) {
-this.cartservice.removeFromCartService(product)
-}
+  grandTotal = computed(() =>
+    this.cartItem().reduce((acc, cur) =>
+      acc + cur.product.price * cur.quantity, 0
+    )
+  );
 
 }
