@@ -22,6 +22,5 @@ export class ProductComponent {
 
  addTocart(product: PRODUCTS) {
    this.cartservice.addToCartService(product);
-  //  console.log(product)
  }
 }
