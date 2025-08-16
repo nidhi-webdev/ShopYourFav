@@ -1,15 +1,16 @@
+<div class="search-input">
+    <input type="text" placeholder="search for Fav" #searchProduct [value]="searchItem()"
+        (input)="searchItem.set(searchProduct.value)">
+</div>
+
 <div class="main-div">
     <h1> Our Collections </h1>
     <div class="card-container">
-        @for (productItem of productData(); track productItem) {
+        @for (productItem of filteredProduct(); track productItem) {
         <div class="card">
             <img [src]="productItem.image" alt="Product Image" class="product-image">
-            <!-- <h3>{{productItem.title}}</h3> -->
             <p>{{productItem.title}}</p>
             <p> €{{productItem.price}}</p>
-
-            <!-- <p>{{productItem.description}}</p> -->
-            <!-- <p>Rating: {{productItem.rating.rate}} ({{productItem.rating.count}} reviews)</p> -->
             <button class="card-button" (click)="addTocart(productItem)"> Add to cart </button>
         </div>
         }

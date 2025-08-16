@@ -1,4 +1,4 @@
-import { Component, Signal } from '@angular/core';
+import { Component, computed, signal, Signal } from '@angular/core';
 import { ProductsService } from '../../Services/products-service';
 import { PRODUCTS } from '../../Models/products.model';
 import { CartService } from '../../Services/cart-service';
@@ -12,15 +12,26 @@ import { CartService } from '../../Services/cart-service';
 })
 export class ProductComponent {
   productData: Signal<PRODUCTS[]>
+  searchItem = signal('');
+
+  constructor(private productservice: ProductsService,
+    private cartservice: CartService
+  ) {
+    this.productData = this.productservice.product;
+  }
+
+  addTocart(product: PRODUCTS) {
+    this.cartservice.addToCartService(product);
+  }
+
+  filteredProduct = computed(() => {
+    const item = this.searchItem().toLowerCase().trim();
+    if (!item) return this.productData();
+    return this.productData().filter(pro =>
+      pro.category.toLowerCase().includes(item) ||
+      pro.title.toLowerCase().includes(item)
+    );
+  });
 
 
- constructor(private productservice: ProductsService,
-  private cartservice: CartService
- ) {
-  this.productData = this.productservice.product;
- }
-
- addTocart(product: PRODUCTS) {
-   this.cartservice.addToCartService(product);
- }
 }
