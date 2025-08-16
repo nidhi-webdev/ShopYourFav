@@ -8,7 +8,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class ProductsService {
   product!: Signal<PRODUCTS[]>
-  apiUrl: string = "https://fakestoreapi.com/products";
+  apiUrl: string = "http://localhost:3000/products";
 
   constructor(private http: HttpClient) {
     this.product = toSignal(this.http.get<PRODUCTS[]>(this.apiUrl), {initialValue: []});
