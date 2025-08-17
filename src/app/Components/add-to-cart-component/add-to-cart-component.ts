@@ -1,20 +1,23 @@
-import { Component, computed, signal, Signal } from '@angular/core';
+import { Component, computed, Signal } from '@angular/core';
 import { CartService } from '../../Services/cart-service';
 import { CARTPRODUCT, PRODUCTS } from '../../Models/products.model';
-// import { JsonPipe } from '@angular/common';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-add-to-cart-component',
+  standalone: true,
   imports: [],
   templateUrl: './add-to-cart-component.html',
   styleUrl: './add-to-cart-component.scss'
 })
 export class AddToCartComponent {
   cartItem!: Signal<CARTPRODUCT[]>;
-  // grandTotal!: number;
-  // countSignal = signal<number>(1); // Count Functionality
-
-  constructor(private cartservice: CartService) {
+  
+  constructor(private cartservice: CartService,
+    private router: Router
+  ) {
     this.cartItem = this.cartservice.cartItem;
     // console.log("From cart", this.cartItem())
   }
@@ -34,5 +37,9 @@ export class AddToCartComponent {
       acc + cur.product.price * cur.quantity, 0
     )
   );
+
+  goToCheckout() {
+    this.router.navigate(['checkout']);
+  }
 
 }
